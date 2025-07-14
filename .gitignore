@@ -1,0 +1,9 @@
+vector_store/
+__pycache__/
+**/__pycache__/
+*.db
+venv/
+.env
+*.pyc
+*.pyo
+*.pyd
