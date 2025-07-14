@@ -8,6 +8,7 @@ from rag.video_rag import process_youtube
 from utils.db_utils import init_db, create_session_record, verify_user, add_user, update_conversation_in_db, get_all_sessions_helper
 from streamlit_cookies_controller import CookieController
 
+os.environ["USER_AGENT"] = "my-rag-app/1.0"
 controller = CookieController()
 
 def show_auth_form():
