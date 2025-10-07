@@ -205,12 +205,28 @@ def main():
                                 
                 with st.spinner("Generating response..."):
                     try:
-                        if not context_docs:
-                            answer = generate_answer(prompt)
+                        # Taking last 4 messages for conversation context
+                        recent_history = st.session_state.messages[-6:-2]
+
+                        # Format conversation history
+                        conversation_history = "\n".join([
+                            f"{msg['role'].capitalize()}: {msg['content']}" for msg in recent_history
+                        ])
+
+                        # Combine conversation + user prompt
+                        if conversation_history:
+                            full_prompt = f"{prompt}\n\n### Conversation History:\n{conversation_history}"
                         else:
-                            answer = generate_answer(prompt, context_docs)
+                            full_prompt = prompt
+                        
+                        if not context_docs:
+                            answer = generate_answer(full_prompt)
+                        else:
+                            answer = generate_answer(full_prompt, context_docs)
                     except Exception as e:
                         answer = f"Error generating response: {e}"
+                    finally:
+                        print(f"Answer: {answer}")
 
                 message_placeholder.markdown(answer)
                 st.session_state.messages.append({"role": "assistant", "content": answer})
