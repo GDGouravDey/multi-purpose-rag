@@ -19,3 +19,4 @@ langchain-chroma
 pydantic
 requests
 tf-keras
+langchain-text-splitters
