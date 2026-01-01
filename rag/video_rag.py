@@ -53,8 +53,9 @@ def fetch_youtube_transcript(video_url):
         else:
             raise ValueError("Invalid YouTube URL format")
 
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        return " ".join([item["text"] for item in transcript])
+        transcript = YouTubeTranscriptApi().fetch(video_id, languages=['en', 'hi'])
+        
+        return " ".join([item.text for item in transcript])
     except Exception as e:
         print(f"Error fetching transcript: {e}")
         return ""

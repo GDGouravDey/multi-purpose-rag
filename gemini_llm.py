@@ -7,11 +7,11 @@ client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 def generate_answer(query, context_docs=None):
     if context_docs is None:
-        prompt = f"""You are a precise and trustworthy assistant.
+        prompt = f"""You are a helpful and trustworthy assistant.
 
-Your task is to answer the user's question *accurately*. 
+Your task is to answer the user's question *fully* and *accurately*. 
 
-If you do not have enough information to answer reliably, respond with: "I don't have enough information to answer that question."
+If you do not have enough information to answer reliably, kindly respond with: "I don't have enough information to answer that question."
 
 ### Question:
 {query}
@@ -20,7 +20,7 @@ If you do not have enough information to answer reliably, respond with: "I don't
     else:
         context = "\n\n".join([doc.page_content for doc in context_docs])
 
-        prompt = f"""You are a precise and trustworthy assistant.
+        prompt = f"""You are a helpful and trustworthy assistant. Your task is to answer the user's question *fully* and *accurately*.
 
 Use the following context to answer the user's question as accurately as possible.
 
